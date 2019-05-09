@@ -15,23 +15,56 @@ sudo apt-get autoclean -y
 sudo apt-get update
 ```
 
+**Also ensure that your Pi is on UTC time.** Influx runs on UTC for standardizing reasons, but if your Pi is in a different timezone your data will be logged at random hours
+
 ## Installing and Configuring Software
 ### InfluxDB
-* Install InfluxDB with these commands:
+Install InfluxDB with these commands:
 ```
 sudo apt install apt-transport-https
 echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 sudo apt update
 ```
-* Use `sudo nano -c /etc/influxdb/influxdb.conf` to edit the Influx configuration file. Scroll down to the [http] section and uncomment the line `enabled: false` and change it to `true`. Also uncomment `bind-address: :8083`
-```
+Use `sudo nano -c /etc/influxdb/influxdb.conf` to edit the Influx configuration file. Scroll down to the [http] section and uncomment the line `enabled: false` and change it to `true`. Also uncomment `bind-address: :8083`
 
+Start Influx with:
 ```
+sudo systemctl enable influxdb
+sudo systemctl start influxdb
+influx
+```
+Time to type in a whole lot of Influx terminal commands:
+* `CREATE DATABASE test` - creates the test database
+* `USE test` - swaps to this database
+* `CREATE USER "admin" WITH PASSWORD "pineapple"` - makes admin account
+* `GRANT ALL ON "test" to "admin"` - gives admin all rights
+* `CREATE USER "grafana" WITH PASSWORD "tape"` - grafana needs an account too
+* `GRANT READ ON "test" TO "grafana"` - gives only reading access
+
 ### Grafana
-* Install Grafana with these commands:
+Install Grafana with these commands:
 
 *make sure that you're downloading the most recent version by checking [their website](https://grafana.com/grafana/download?platform=arm)*
 ```
 wget https://dl.grafana.com/oss/release/grafana-rpi_6.1.4_armhf.deb 
 sudo dpkg -i grafana-rpi_6.1.4_armhf.deb 
 ```
+Start Grafana with:
+```
+sudo service grafana-server start
+```
+Open up a browser and go to `localhost:3000`. This should pull up the Grafana log in page. The default username and password are both `admin`
+
+Click "Add a Data Source" and change to these settings:
+*ill add a super cute pic here to make it ezpz*
+
+Hit test on the bottom, all you should see is just a cute lil green box saying everything is successful
+
+### Running the Program
+Download the `datagen.py` program to your favorite folder and navigate to it in your terminal. Run the command `python datagen.py` to get him going. You should see a time stamp with random numbers populate the terminal, along with sent confirmations
+
+Go back to Grafana and create a new dashboard. Follow these settings:
+
+*another cute pic*
+
+You should now have a cute lil graph running across your screen <3
