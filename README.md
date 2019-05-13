@@ -59,7 +59,8 @@ sudo service grafana-server start
 Open up a browser and go to `localhost:3000`. This should pull up the Grafana log in page. The default username and password are both `admin`
 
 Click "Add a Data Source" and change to these settings:
-*ill add a super cute pic here to make it ezpz*
+
+<img src="https://github.com/crmontminy/solar_car/blob/master/grafana_settings.png" alt="settings" width="70%" height="70%">
 
 Hit test on the bottom, all you should see is just a cute lil green box saying everything is successful
 
@@ -68,6 +69,6 @@ Download the `datagen.py` program to your favorite folder and navigate to it in 
 
 Go back to Grafana and create a new dashboard. Follow these settings:
 
-*another cute pic*
+<img src="https://github.com/crmontminy/solar_car/blob/master/grafana-dash.png" alt="dash" width="70%" height="70%">
 
 You should now have a cute lil graph running across your screen <3
