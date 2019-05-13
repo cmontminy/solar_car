@@ -25,7 +25,10 @@ sudo apt install apt-transport-https
 echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 sudo apt update
 ```
-Use `sudo nano -c /etc/influxdb/influxdb.conf` to edit the Influx configuration file. Scroll down to the [http] section and uncomment the line `enabled: false` and change it to `true`. Also uncomment `bind-address: :8083`
+Use `sudo nano -c /etc/influxdb/influxdb.conf` to edit the Influx configuration file. Scroll down to the [http] section and uncomment these things:
+* `enabled: false` and change it to `true`
+* `bind-address: ":8086"`
+* `auth-enabled = true`
 
 Start Influx with:
 ```
