@@ -1,6 +1,8 @@
 # Telemetry Demo
 This program / instructions make a simple system for presenting dummy speed data. Basically a proof of concept for the InfluxDB and Grafana combo c:
 
+(you can find the full program in the SVT organization telemetry repo)
+
 ---
 ## First Time Set Up 
 *assuming you're starting with a brand new raspberry pi, if not just skip this*
